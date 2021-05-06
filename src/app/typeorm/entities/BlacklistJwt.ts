@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import Company from './Company';
 
-@Entity('bliacklist_jwt')
+@Entity('blacklist_jwt')
 export default class BlacklistJwt {
   @PrimaryGeneratedColumn('increment')
   id: number;
