@@ -11,6 +11,7 @@ import {
 
 import bcrypt from 'bcryptjs';
 import BlacklistJwt from './BlacklistJwt';
+import Flight from './Flight';
 
 @Entity('companies')
 export default class Company {
@@ -48,4 +49,7 @@ export default class Company {
 
   @OneToMany(() => BlacklistJwt, token => token.company)
   tokensBlacklist: BlacklistJwt[];
+
+  @OneToMany(() => Flight, flight => flight.company)
+  flight: Flight;
 }
