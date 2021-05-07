@@ -54,4 +54,10 @@ export default class CompanyRepository implements ICompanyRepository {
     });
     return company;
   }
+
+  public async findOneById(id: number): Promise<Company | undefined> {
+    const company = await this.ormRepository.findOne(id);
+
+    return company;
+  }
 }

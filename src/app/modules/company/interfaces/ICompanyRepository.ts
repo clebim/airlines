@@ -9,4 +9,5 @@ export default interface ICompanyRepository {
   ): Promise<Company | undefined>;
   findOneByEmail(email: string): Promise<Company | undefined>;
   getCompanyWithPassword(email: string): Promise<Company | undefined>;
+  findOneById(id: number): Promise<Company | undefined>;
 }
