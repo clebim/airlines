@@ -29,8 +29,8 @@ export default class Airport {
   updated_at: Date;
 
   @OneToMany(() => Flight, flight => flight.airport_origin)
-  flight_origin: Flight;
+  flight_origin: Flight[];
 
   @OneToMany(() => Flight, flight => flight.airport_destiny)
-  flight_destiny: Flight;
+  flight_destiny: Flight[];
 }

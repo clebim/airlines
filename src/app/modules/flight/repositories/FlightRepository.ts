@@ -11,6 +11,25 @@ export default class FlightRepository implements IFlightRepository {
     this.ormRepository = getConnection(connection).getRepository(Flight);
   }
 
+  public async listDestinyByOrigin(originId: number): Promise<Flight[]> {
+    const flights = this.ormRepository
+      .createQueryBuilder('flights')
+      .innerJoin('flights.airport_origin', 'airport')
+      .innerJoin('flights.airport_destiny', 'airport_destiny')
+      .where('flights.airport_origin_id = :id', { id: originId })
+      .select([
+        'flights.id',
+        'airport.nickname',
+        'airport_destiny.name',
+        'airport_destiny.nickname',
+        'airport_destiny.city',
+      ])
+      .distinctOn(['flights.airport_destiny_id'])
+      .getMany();
+
+    return flights;
+  }
+
   public async create(data: ICreateFlight): Promise<Flight> {
     const newFlight = this.ormRepository.create({
       name: data.name,

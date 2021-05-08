@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateFlightService from '../services/CreateFlightService';
+import ListDestinyByOriginService from '../services/ListDestinyByOriginService';
 
 export default {
   async create(request: Request, response: Response): Promise<Response> {
@@ -33,5 +34,22 @@ export default {
     });
 
     return response.status(200).json(responseService);
+  },
+
+  async listDestinyByOrigin(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const listDestinyByOriginService = container.resolve<ListDestinyByOriginService>(
+      ListDestinyByOriginService,
+    );
+
+    const { id } = request.params;
+
+    const responseService = await listDestinyByOriginService.execute(
+      parseInt(id),
+    );
+
+    return response.json(responseService);
   },
 };
