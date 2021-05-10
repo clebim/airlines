@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 import CreateFlightService from '../services/CreateFlightService';
 import ListDestinyByOriginService from '../services/ListDestinyByOriginService';
+import SearchFlightsByDateService from '../services/SearchFlightsByDateService';
 
 export default {
   async create(request: Request, response: Response): Promise<Response> {
@@ -49,6 +50,24 @@ export default {
     const responseService = await listDestinyByOriginService.execute(
       parseInt(id),
     );
+
+    return response.json(responseService);
+  },
+
+  async searchFlightsByDateService(
+    request: Request,
+    response: Response,
+  ): Promise<Response> {
+    const searchFlightsByDateService = container.resolve<SearchFlightsByDateService>(
+      SearchFlightsByDateService,
+    );
+
+    const { date, company_id } = request.body;
+
+    const responseService = await searchFlightsByDateService.execute({
+      date,
+      companyId: parseInt(company_id),
+    });
 
     return response.json(responseService);
   },

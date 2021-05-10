@@ -3,12 +3,30 @@ import Flight from '@modules/typeorm/entities/Flight';
 import { getConnection, Repository } from 'typeorm';
 import ICreateFlight from '../interfaces/ICreateFlight';
 import IFlightRepository from '../interfaces/IFlightRepository';
+import ISearchFlightsByDate from '../interfaces/ISearchFlightsByDate';
 
 export default class FlightRepository implements IFlightRepository {
   private ormRepository: Repository<Flight>;
 
   constructor() {
     this.ormRepository = getConnection(connection).getRepository(Flight);
+  }
+
+  public async listFlightsByDate(
+    data: ISearchFlightsByDate,
+  ): Promise<Flight[]> {
+    const flights = await this.ormRepository.find({
+      where: {
+        day_week: data.date,
+        company_id: data.companyId,
+      },
+      relations: ['airport_origin', 'airport_destiny'],
+      order: {
+        exit_at: 'ASC',
+      },
+    });
+
+    return flights;
   }
 
   public async listDestinyByOrigin(originId: number): Promise<Flight[]> {
