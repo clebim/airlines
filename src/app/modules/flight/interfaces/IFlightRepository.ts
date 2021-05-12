@@ -6,4 +6,5 @@ export default interface IFlightRepository {
   create(data: ICreateFlight): Promise<Flight>;
   listDestinyByOrigin(originId: number): Promise<Flight[]>;
   listFlightsByDate(data: ISearchFlightsByDate): Promise<Flight[]>;
+  findById(flightId: number): Promise<Flight | undefined>;
 }

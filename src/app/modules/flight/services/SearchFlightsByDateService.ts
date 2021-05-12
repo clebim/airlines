@@ -1,9 +1,9 @@
 import Flight from '@modules/typeorm/entities/Flight';
 import { inject, injectable } from 'tsyringe';
 import { getDay, parseISO } from 'date-fns';
-import { helperDayOfTheWeek } from '@shared/utils/HelperDayOfTheWeek';
 import ICompanyRepository from '@modules/modules/company/interfaces/ICompanyRepository';
 import AppError from 'errors/AppError';
+import { helperDayOfTheWeek } from 'utils/HelperDayOfTheWeek';
 import IFlightRepository from '../interfaces/IFlightRepository';
 import ISearchFlightsByDate from '../interfaces/ISearchFlightsByDate';
 

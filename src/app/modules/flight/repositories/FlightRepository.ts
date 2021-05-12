@@ -12,6 +12,16 @@ export default class FlightRepository implements IFlightRepository {
     this.ormRepository = getConnection(connection).getRepository(Flight);
   }
 
+  public async findById(flightId: number): Promise<Flight | undefined> {
+    const flight = this.ormRepository.findOne({
+      where: {
+        id: flightId,
+      },
+    });
+
+    return flight;
+  }
+
   public async listFlightsByDate(
     data: ISearchFlightsByDate,
   ): Promise<Flight[]> {

@@ -4,11 +4,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import Airport from './Airport';
 import Company from './Company';
+import Ticket from './Ticket';
 
 @Entity('flights')
 export default class Flight {
@@ -59,4 +61,7 @@ export default class Flight {
   @ManyToOne(() => Company, company => company.flight)
   @JoinColumn({ name: 'company_id' })
   company: Company;
+
+  @OneToMany(() => Ticket, ticket => ticket.flight)
+  tickets: Ticket[];
 }
