@@ -8,9 +8,9 @@
     "strict": true,
     "allowJs": true,
     "paths": {
-      "@modules/*": ["app/*"],
-      "@config/*": ["config/*"],
-      "@shared/*": ["shared/*"]
+      "@modules/*": ["./app/*"],
+      "@config/*": ["./config/*"],
+      "@shared/*": ["./shared/*"]
     },
     "strictPropertyInitialization": false,
     "esModuleInterop": true,
@@ -25,6 +25,9 @@
     ]
   },
   "include": [
-    "src/**/*"
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./prettier.config.js"
   ]
 }

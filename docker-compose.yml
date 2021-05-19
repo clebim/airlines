@@ -1,0 +1,35 @@
+version: "3.3"
+
+networks:
+  asa-network:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+services:
+  postgres-server:
+    image: postgres
+    container_name: bd_production
+    environment:
+      POSTGRES_PASSWORD: docker
+      POSTGRES_USER: postgres
+      POSTGRES_DB: db_asa
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      asa-network:
+        ipv4_address: 172.20.0.6
+
+  node_app:
+    build: .
+    depends_on:
+      - "postgres-server"
+    container_name: app_production
+    ports:
+      - '3333:3333'
+    networks:
+      asa-network:
+        ipv4_address: 172.20.0.5
+
