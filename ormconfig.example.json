@@ -14,22 +14,8 @@
     }
   },
   {
-    "name": "test",
+    "name": "tests",
     "type": "",
-    "host": "",
-    "port": 5432,
-    "username": "",
-    "password": "",
-    "database": "",
-    "migrations": [],
-    "entities": [],
-    "cli": {
-      "migrationsDir": ""
-    }
-  },
-  {
-    "name": "production",
-    "type": "postgres",
     "host": "",
     "port": 5432,
     "username": "",
